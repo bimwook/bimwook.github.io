@@ -186,7 +186,7 @@
 
         vx.load = function(){
           var me = this;
-          ajax.get("./data/shez.md", function(o){
+          ajax.get("./data/main.md", function(o){
             var title = me.title(o.text);
             var html = marked.parse(me.encode(o.text));
             document.title = title;
