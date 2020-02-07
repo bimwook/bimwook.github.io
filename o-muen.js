@@ -1,3 +1,4 @@
+
 -function(woo){
   var w = window;
   if(!String.prototype.trim){
@@ -85,6 +86,7 @@
         done({status: this.status, text: this.responseText, data: this.response, error: null, headers: headers, json: function(){ return fn.json(this); }});
       }
       xhr.open(method||"GET", url, true);
+      xhr.setRequestHeader("X-With","o-muen/1.0");
       if(method=="POST"){
         xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded");   
       }
