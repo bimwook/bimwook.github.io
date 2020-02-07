@@ -1,20 +1,20 @@
 
-¡¡¡¡# woo.omuen.com
-¡¡¡¡
-¡¡¡¡_The woods are lovely_
-¡¡¡¡_Dark and deep_
-¡¡¡¡_But I have promises to keep_
-¡¡¡¡_And miles to go before I sleep_
-¡¡¡¡_And miles to go before I sleep_
-¡¡¡¡
-¡¡¡¡_Robert Frost_
+ã€€ã€€# woo.omuen.com
+ã€€ã€€
+ã€€ã€€_The woods are lovely_
+ã€€ã€€_Dark and deep_
+ã€€ã€€_But I have promises to keep_
+ã€€ã€€_And miles to go before I sleep_
+ã€€ã€€_And miles to go before I sleep_
+ã€€ã€€
+ã€€ã€€_Robert Frost_
 ---------------------------------------------------------------------------------------
-¡¡¡¡
-¡¡¡¡## HOME
-¡¡¡¡- [Wide Area Network](https://www.bimwook.com:11180/home.html)
-¡¡¡¡- [Local Area Network](https://local.bimwook.com/home.html)
-¡¡¡¡
+ã€€ã€€
+ã€€ã€€## HOME
+ã€€ã€€- [Wide Area Network](https://www.bimwook.com:11180/home.html)
+ã€€ã€€- [Local Area Network](https://local.bimwook.com/home.html)
+ã€€ã€€
 ---------------------------------------------------------------------------------------
-¡¡¡¡
-¡¡¡¡[Enter](//me.bimwook.com)
-¡¡¡¡
+ã€€ã€€
+ã€€ã€€[Enter](//me.bimwook.com)
+ã€€ã€€
