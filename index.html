@@ -1,34 +1,202 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>woo.omuen.com</title>
+    <meta name="generator" content="bimwook.com" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>Markdown-Viewer - bimwook.com</title>
     <style type="text/css">
-      html {font-size: 16px;}
-      body {
-        margin:0; padding: 2em;
-        font-family: verdana, "Microsoft Yahei";
-      }
-      a {
-        color:#006291; 
-        text-decoration: none; 
-        transition: all 0.3s ease-out;
-      }
-      a:link {color:#006291;}
-      a:visited {color:#006291;}
+      html { margin:0; padding:0; background: gray; }
+      body { margin:0 auto; padding:0; width: 100%; max-width: 980px; font-size: 16px; line-height: 1.8; font-family: verdana, "Microsoft Yahei"; }
+      img  { max-width: 100%; background-color: #EAEAEA; display:block; margin: 0 auto; }
+      video {width: 100%; max-width: 100%; background-color: #EAEAEA; display:block; margin: 0 auto; }
+      h1 { font-size: 32px; }
+      h2 { font-size: 24px; }
+      h3 { font-size: 18px; }
+      h4 { font-size: 16px; }
+      h5 { font-size: 14px; }
+      h6 { font-size: 12px; }
+      a { text-decoration: none; color:#006291; }
+      a:link { color:#006291; }
+      a:visited { color:#006291; }
       a:hover{ text-decoration: none; color: #FF6633; }
+      hr { border: none; height: 1px; background: #DDDDDD; }
+      p { margin: 0.8em 0; padding: 0; text-indent: 2em; }
+      em { font-style: normal; }
+      blockquote { margin: 2em; padding: 8px; text-indent: 0; border-left: solid 5px silver; background-color: #EEEEEE; }
+      .tag { font-size: 0.9em; border: solid 1px silver; border-radius: 3px; padding: 4px; background-color: #EEEEEE; color: gray; vertical-align: middle; }
+      .bar { padding: 4px 16px; color: gray; background-color: #EAEAEA; }
+      #content { color: #646464; padding: 32px 96px; background-color: white; overflow: hidden; }
+      #likeit { cursor: pointer; padding: 0 8px; color:#006291; margin-left: 8px; background-color: #FAFAFA; }
+      #likeit:active { background-color: white; }
+      #share { padding: 32px 96px; display: block; overflow: hidden; background-color: #FAFAFA; }
+      #share .qr-code { float: left; }
+      #share .memo { float: left; margin: 0; padding: 8px; list-style-type: none; }
+      #data { display: none; }
+      @media screen and (max-width: 639px) {
+        #content { padding: 8px 32px; overflow: hidden; }
+        #share { display: none; }
+      }
+      @media screen and (max-width: 479px) {
+        #content { padding: 8px 16px; overflow: hidden; }
+        #share { display: none; }
+      }
     </style>
+    <script type="text/javascript" src="./js/o-muen.js"></script>
+    <script type="text/javascript" src="./js/o-marked.js"></script>
+    <script type="text/javascript" src="./js/o-base64.js"></script>
+    <script type="text/javascript" src="./js/o-body.js"></script>
   </head>
   <body>
-    <h1 style="text-indent: 1em;">woo.omuen.com</h1>
-    <hr />
-    <div style="padding: 2em;">
-      <b>HOME</b>
-      <ul>
-        <li><a href="https://www.bimwook.com:11180/home.html"> Wide Area Network </a></li>
-        <li><a href="https://local.bimwook.com/home.html"> Local Area Network </a></li>
-      </ul>
+    <div class="bar">
+      <em> | </em>
+      <a href="./index.html">HOME</a>
+      <em> | </em>
+      <em id="title" ></em>
     </div>
+    <div id="content">正在加载...</div>
+    <div class="bar">We are here.</div>
+    <script type="text/javascript">
+      -function(){
+        var ajax = window.Modules.load("ajax");
+        var bd = window.Modules.load("o-body");
+        var marked = window.Modules.load("marked");
+        var base64 = window.Modules.load("base64");
+        var $ = function(id){
+          return {
+            dom: document.querySelector(id),
+            html: function(data){
+              var me = this;
+              if(typeof(data)=="string"){
+                me.dom.innerHTML = data;
+              }
+              else {
+                return me.dom.innerHTML;
+              }
+            },
+            text: function(data){
+              var me = this;
+              if(typeof(data)=="string"){
+                me.dom.innerText = data;
+              }
+              else {
+                return me.dom.innerText;
+              }
+            },
+            append: function(node){
+              this.dom.appendChild(node);
+            }
+          }
+        };
+        var vx = {};
+        vx.rowid="";
+        vx.title = function(data){
+          var regex = /^(#{1,6}) {0,}([^\n]+?) *#* *(?:\n+|$)/;
+          var t="无题";
+          var min = 7;
+          var lines = (data||"").split("\n");
+          for(var i=0; i<lines.length; i++){
+            var line = (lines[i]||"").replace(/(^\s*)|(\s*$)/g, "");
+            var mcs = line.match(regex);
+            if(!mcs) continue;
+            var l = mcs[1].length;
+            if(l<min){ t = mcs[2]; min = l;}
+          }
+          return t;
+        };
+        vx.encode = function(s){
+          return s.replace(/\r/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+        };
+        vx.lazyload = {
+          locked: false,
+          timer: 0,
+          items: [],
+          clear: function(){
+            this.items = [];
+            this.locked = false;
+          },
+          run: function(){
+            var me = this;
+            var top = (document.documentElement.scrollTop || document.body.scrollTop);
+            var line = top + document.documentElement.clientHeight;
+            if (me.locked) return;
+            me.locked = true;
+            var rest = [];
+            while(me.items.length>0){
+              var img = me.items.pop();
+              var t = img.offsetTop;
+              if((t>=top) && (t<=line)) {
+                img.onload = function(){
+                  this.style.cursor = "pointer";
+                  this.style.width="auto";
+                  this.style.background = "#EAEAEA";
+                  this.onclick = function(){  
+                    window.open(this.src);
+                  };
+                };
+                img.onerror = function(){
+                  this.style.cursor = "pointer";
+                  var src= this.src;
+                  this.onclick = function(){  
+                    this.src = src;
+                  };
+                  this.src="./media/opacity.png";
+                }
+                img.src = img.status.src.replace(/&amp;/g,"&");
+              }
+              else{
+                rest.push(img);
+              }
+            }
+            me.items = rest.reverse();
+            if(me.items.length==0) {
+              window.onscroll = null;
+            }
+            me.locked = false;
+          },
+          load: function(id){
+            var me = this;
+            var nodes = $(id).dom.getElementsByTagName("img");
+            var list = [];
+            for(var i=0; i<nodes.length; i++){ 
+              list.push(nodes[i]);
+            }
+            list.reverse();
+            for(var i=0; i<list.length; i++){ 
+              var img = list[i];
+              var src = img.attributes["data-src"]||{name:"",value:"./media/opacity.png"};
+              img.src="./media/opacity.png";
+              img.style.width="100%";
+              img.style.height = "auto";
+              img.style.background = "silver url(./media/loading.svg) no-repeat center center";
+              img.style.backgroundSize = "3rem 3rem";
+              img.status={loaded:false, src: src.value};
+              me.items.push(img);
+            }
+            window.onscroll = function(){
+              window.clearTimeout(me.timer);
+              me.timer = window.setTimeout(function(){ me.run() },500);
+            };
+            this.run();
+          }
+        };
+
+        vx.load = function(){
+          var me = this;
+          ajax.get("./data/shez.md", function(o){
+            var title = me.title(o.text);
+            var html = marked.parse(me.encode(o.text));
+            document.title = title;
+            $("#title").text(title);
+            $("#content").html(html.replace(/<img src=/g, "<img data-src=") );
+            me.lazyload.load("#content");
+          });
+        };
+        vx.load();
+      }();
+    </script>
   </body>
 </html>
