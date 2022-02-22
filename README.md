@@ -8,11 +8,4 @@
     
  　　 　　 　　 _Robert Frost_  
 ---------------------------------------------------------------------------------------
-
-## HOME
-- [Wide Area Network](https://www.bimwook.com:11180/home.html)  
-- [Local Area Network](https://local.bimwook.com/home.html)  
-
----------------------------------------------------------------------------------------
-
   [Enter](//me.bimwook.com)
