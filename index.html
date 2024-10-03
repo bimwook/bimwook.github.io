@@ -10,143 +10,286 @@
     <meta name="format-detection" content="telephone=no" />
     <title>Markdown-Viewer - bimwook.com</title>
     <style type="text/css">
-      html { margin:0; padding:0; background: gray; }
-      body { margin:0 auto; padding:0; width: 100%; max-width: 980px; font-size: 16px; line-height: 1.8; font-family: verdana, "Microsoft Yahei"; }
-      img  { max-width: 100%; background-color: #EAEAEA; display:block; margin: 0 auto; }
-      video {width: 100%; max-width: 100%; background-color: #EAEAEA; display:block; margin: 0 auto; }
-      h1 { font-size: 32px; }
-      h2 { font-size: 24px; }
-      h3 { font-size: 18px; }
-      h4 { font-size: 16px; }
-      h5 { font-size: 14px; }
-      h6 { font-size: 12px; }
-      a { text-decoration: none; color:#006291; }
-      a:link { color:#006291; }
-      a:visited { color:#006291; }
-      a:hover{ text-decoration: none; color: #FF6633; }
-      hr { border: none; height: 1px; background: #DDDDDD; }
+      * { box-sizing: border-box; }
+      html {
+        margin:0;
+        padding:0;
+        height: 100%;
+        font-size: 16px;
+        background-color: gray;
+      }
+      body {
+        margin:0 auto;
+        padding:0;
+        width: 100%;
+        min-height:100%;
+        max-width: 980px;
+        font-size: 1em;
+        line-height: 1.8;
+        overflow: auto;
+        background-color: white;
+        font-family: tahoma, verdana, "Microsoft Yahei";
+      }
+      img {
+        margin: 0 auto;
+        display:block;
+        max-width: 100%;
+        background-color: rgba(0,0,0,0.05);
+      }
+      h1,h2,h3,h4,h5,h6 {
+        margin:0;
+        padding: 8px 32px;
+        text-align: left;
+      }
+      h1 { font-size: 2.0em; border-bottom: solid 1px #EAEAEA; }
+      h2 { font-size: 1.8em; }
+      h3 { font-size: 1.6em; }
+      h4 { font-size: 1.4em; }
+      h5 { font-size: 1.2em; }
+      h6 { font-size: 1.0em; }
+      a {
+        color: rgba(0,0,0,0.816);
+        text-decoration: none;
+      }
+      a:link { color: rgba(0,0,0,0.816); }
+      a:visited { color: rgba(0,0,0,0.816); }
+      a:hover { text-decoration: none; color: black; }
+      em { font-style: normal; font-weight: normal; }
+      hr {
+        margin: 0;
+        padding: 0;
+        border: none;
+        height: 1px;
+        background: #EAEAEA;
+      }
       p { margin: 0.8em 0; padding: 0; text-indent: 2em; }
-      em { font-style: normal; }
-      blockquote { margin: 2em; padding: 8px; text-indent: 0; border-left: solid 5px silver; background-color: #EEEEEE; }
-      .tag { font-size: 0.9em; border: solid 1px silver; border-radius: 3px; padding: 4px; background-color: #EEEEEE; color: gray; vertical-align: middle; }
-      .bar { padding: 4px 16px; color: gray; background-color: #EAEAEA; }
-      #content { color: #646464; padding: 32px 96px; background-color: white; overflow: hidden; }
-      #likeit { cursor: pointer; padding: 0 8px; color:#006291; margin-left: 8px; background-color: #FAFAFA; }
-      #likeit:active { background-color: white; }
-      #share { padding: 32px 96px; display: block; overflow: hidden; background-color: #FAFAFA; }
-      #share .qr-code { float: left; }
-      #share .memo { float: left; margin: 0; padding: 8px; list-style-type: none; }
+      ul {
+        margin: 1em;
+        padding: 0;
+        padding-left: 2.5em;
+        list-style-type: disc;
+      }
+      li {
+        margin:0;
+        padding:0;
+      }
+      dl, dd {
+        margin:0;
+        padding:0;
+      }
+      section {
+        margin: 0;
+        padding: 0;
+        display: block;
+      }
+      @keyframes mx-load {
+        0% { background-color: rgb(200, 200, 200); }
+        50% { background-color: rgb(210, 210, 210); }
+        100% { background-color: rgb(200, 200, 200); }
+      }
+      .mx-load {
+        width: 100%;
+        height: auto;
+        margin: 1em auto;
+        background-image: url(/media/loading.svg);
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: 3rem 3rem;
+        animation-name: mx-load;
+        animation-duration: 1s;
+        animation-iteration-count: infinite;
+      }
+      .mx-error {
+        width: auto;
+        height: auto;
+        margin: 1em auto;
+        background-color: rgba(250,250,250,0.8);
+      }
+      .mx-normal {
+        width: auto;
+        cursor: pointer;
+        background-color: rgba(250,250,250,1);
+      }
+      .md-blocks {
+        margin: 1em 2em;
+        padding: 0.5em 1em;
+        text-indent: 0;
+        border-left: solid 5px silver;
+        background-color: #EEEEEE;
+      }
+      .md-label {
+        color: gray;
+        padding: 4px;
+        font-size: 0.9em;
+        border: solid 1px silver;
+        border-radius: 3px;
+        background-color: #EEEEEE;
+        vertical-align: middle;
+      }
+      .md-italic {
+        font-style: italic;
+      }
+      .md-media-audio {
+        display:block;
+      }
+      .md-media-video {
+        width: 100%;
+        display:block;
+      }
+      .mx-bar {
+        padding: 0 16px;
+        color: rgba(0,0,0,0.618);
+        height: 48px;
+        display: flex;
+        gap: 8px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        background-color: rgba(200,200,200,0.618);
+      }
+      .mx-row {
+        margin: 0;
+        padding: 8px 16px;
+        display: flex;
+        gap: 8px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      .mx-auto {
+        flex: 1;
+      }
+      .mx-center {
+        margin: 0;
+        color: silver;
+        padding: 1em;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: center;
+      }
+      .mx-text-center {
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        display: block;
+        text-align: center;
+      }
+      .mx-small {
+        color: silver;
+        font-size: 0.875em;
+      }
+      .mx-content {
+        color: #646464;
+        padding: 32px 96px;
+        font-size: 1rem;
+        text-align: justify;
+        line-height: 1.618;
+        background-color: white;
+        overflow: hidden;
+      }
+      .mx-link {
+        transition: all 0.3s ease-out;
+      }
       #data { display: none; }
       @media screen and (max-width: 639px) {
-        #content { padding: 8px 32px; overflow: hidden; }
-        #share { display: none; }
+        h1,h2,h3,h4,h5,h6 { text-align: left; }
+        .mx-content{ padding: 2em 4em; overflow: hidden; }
+        #mono { display: none; }
+        #version { display: none; }
       }
       @media screen and (max-width: 479px) {
-        #content { padding: 8px 16px; overflow: hidden; }
-        #share { display: none; }
+        .mx-content{ padding: 2em; overflow: hidden; }
+      }
+      @media print {
+        h2 { page-break-before:always; }
+        .mx-bar { display: none; }
+        .mx-content{ padding: 0; }
       }
     </style>
-    <script type="text/javascript" src="./js/o-muen.js"></script>
-    <script type="text/javascript" src="./js/o-marked.js"></script>
-    <script type="text/javascript" src="./js/o-base64.js"></script>
-    <script type="text/javascript" src="./js/o-body.js"></script>
+    <script type="text/javascript" src="./cdn/woo.js"></script>
+    <script type="text/javascript" src="./cdn/marked.js"></script>
+    <script type="text/javascript" src="./cdn/base64.js"></script>
   </head>
   <body>
-    <div class="bar">
+    <div class="mx-bar">
       <em> | </em>
       <a href="./index.html">HOME</a>
       <em> | </em>
       <em id="title" ></em>
     </div>
-    <div id="content">正在加载...</div>
-    <div class="bar">We are here.</div>
+    <div id="content" class="mx-content">正在加载...</div>
+    <div class="mx-bar">We are here.</div>
     <script type="text/javascript">
-      -function(){
-        var ajax = window.Modules.load("ajax");
-        var bd = window.Modules.load("o-body");
-        var marked = window.Modules.load("marked");
-        var base64 = window.Modules.load("base64");
-        var $ = function(id){
-          return {
-            dom: document.querySelector(id),
-            html: function(data){
-              var me = this;
-              if(typeof(data)=="string"){
-                me.dom.innerHTML = data;
-              }
-              else {
-                return me.dom.innerHTML;
-              }
-            },
-            text: function(data){
-              var me = this;
-              if(typeof(data)=="string"){
-                me.dom.innerText = data;
-              }
-              else {
-                return me.dom.innerText;
-              }
-            },
-            append: function(node){
-              this.dom.appendChild(node);
+      (()=>{
+        const web = window.Web;
+        const marked = window.Marked;
+        const base64 = window.Base64;
+        const $ = (id)=>{ document.querySelector(id) };
+        const woo = {
+          rowid: "",
+          title(data){
+            let regex = /^(#{1,6}) {0,}([^\n]+?) *#* *(?:\n+|$)/;
+            let t="无题";
+            let min = 7;
+            let lines = (data||"").split("\n");
+            for(let i=0; i<lines.length; i++){
+              let line = (lines[i]||"").replace(/(^\s*)|(\s*$)/g, "");
+              let mcs = line.match(regex);
+              if(!mcs) continue;
+              let l = mcs[1].length;
+              if(l<min){ t = mcs[2]; min = l;}
             }
-          }
-        };
-        var vx = {};
-        vx.rowid="";
-        vx.title = function(data){
-          var regex = /^(#{1,6}) {0,}([^\n]+?) *#* *(?:\n+|$)/;
-          var t="无题";
-          var min = 7;
-          var lines = (data||"").split("\n");
-          for(var i=0; i<lines.length; i++){
-            var line = (lines[i]||"").replace(/(^\s*)|(\s*$)/g, "");
-            var mcs = line.match(regex);
-            if(!mcs) continue;
-            var l = mcs[1].length;
-            if(l<min){ t = mcs[2]; min = l;}
-          }
-          return t;
-        };
-        vx.encode = function(s){
-          return s.replace(/\r/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
-        };
-        vx.lazyload = {
-          locked: false,
-          timer: 0,
-          items: [],
-          clear: function(){
-            this.items = [];
-            this.locked = false;
+            return t;
           },
-          run: function(){
-            var me = this;
-            var top = (document.documentElement.scrollTop || document.body.scrollTop);
-            var line = top + document.documentElement.clientHeight;
-            if (me.locked) return;
-            me.locked = true;
-            var rest = [];
-            while(me.items.length>0){
-              var img = me.items.pop();
-              var t = img.offsetTop;
+          encode(s){
+            return (s||"").replace(/\r/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+          }
+        };
+        let media = {
+          items: [],
+          clear(){
+            items = [];
+          },
+          run(){
+            let me = this;
+            let top = (document.documentElement.scrollTop || document.body.scrollTop);
+            let line = top + document.documentElement.clientHeight;
+            let rest = [];
+            while(this.items.length>0){
+              let img = this.items.pop();
+              let t = img.offsetTop;
               if((t>=top) && (t<=line)) {
                 img.onload = function(){
-                  this.style.cursor = "pointer";
-                  this.style.width="auto";
-                  this.style.background = "#EAEAEA";
-                  this.onclick = function(){  
-                    window.open(this.src);
-                  };
+                  let src = this.attributes["data-src"];
+                  if(this.src.indexOf(src.value)>-1){
+                    this.className = "mx-normal";
+                    this.onclick = function(){ window.open(this.src) };
+                  }
+                  else {
+                    let g = this;
+                    this.style.cursor = "pointer";
+                    if(this.src.indexOf("/media/text.svg")>-1){
+                      this.className = "mx-error";
+                    }
+                    this.onclick = ()=>{
+                      g.src = "/media/nil.svg";
+                      window.setTimeout(()=>{
+                        g.className = "mx-load";
+                      }, 0);
+                      window.setTimeout(()=>{
+                        g.className = "mx-load";
+                        g.src = src.value;
+                      }, 300);
+                    };
+                  }
                 };
                 img.onerror = function(){
-                  this.style.cursor = "pointer";
-                  var src= this.src;
-                  this.onclick = function(){  
-                    this.src = src;
-                  };
-                  this.src="./media/opacity.png";
+                  this.onclick = null;
+                  this.src="/media/err.svg";
                 }
-                img.src = img.status.src.replace(/&amp;/g,"&");
+                img.className = "mx-load";
+                img.src = (img.attributes["data-src"]||{name:"",value:"/media/nil.svg"}).value;
               }
               else{
                 rest.push(img);
@@ -156,47 +299,33 @@
             if(me.items.length==0) {
               window.onscroll = null;
             }
-            me.locked = false;
           },
-          load: function(id){
-            var me = this;
-            var nodes = $(id).dom.getElementsByTagName("img");
-            var list = [];
-            for(var i=0; i<nodes.length; i++){ 
+          load(id){
+            let me = this;
+            let nodes = $(id).getElementsByTagName("img");
+            let list = [];
+            for(let i=0; i<nodes.length; i++){
               list.push(nodes[i]);
             }
             list.reverse();
-            for(var i=0; i<list.length; i++){ 
-              var img = list[i];
-              var src = img.attributes["data-src"]||{name:"",value:"./media/opacity.png"};
-              img.src="./media/opacity.png";
-              img.style.width="100%";
-              img.style.height = "auto";
-              img.style.background = "silver url(./media/loading.svg) no-repeat center center";
-              img.style.backgroundSize = "3rem 3rem";
-              img.status={loaded:false, src: src.value};
+            for(let i=0; i<list.length; i++){
+              let img = list[i];
+              img.className = "o-load";
               me.items.push(img);
             }
-            window.onscroll = function(){
-              window.clearTimeout(me.timer);
-              me.timer = window.setTimeout(function(){ me.run() },500);
-            };
+            window.onscroll = woo.throttle( ()=>{ me.run() }, 500);
             this.run();
           }
-        };
-        vx.load = function(){
-          var me = this;
-          ajax.get("./data/main.md", function(o){
-            var title = me.title(o.text);
-            var html = marked.parse(me.encode(o.text));
-            document.title = title;
-            $("#title").text(title);
-            $("#content").html(html.replace(/<img src=/g, "<img data-src=") );
-            me.lazyload.load("#content");
-          });
-        };
-        vx.load();
-      }();
+        }
+        web.get("./data/main.md").then((o)=>{
+          let title = woo.title(o.text);
+          let html = marked.parse(woo.encode(o.text));
+          document.title = title;
+          $("#title").innerText = (title);
+          $("#content").innerHTML = (html.replace(/<img src=/g, "<img data-src=") );
+          media.load("#content");
+        });
+      })();
     </script>
   </body>
 </html>
