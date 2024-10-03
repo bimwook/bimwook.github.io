@@ -248,6 +248,15 @@
             }
             return t;
           },
+          throttle(action, delay){
+            let me = this;
+            let timer=null;
+            return ()=>{
+              let args = arguments;
+              window.clearTimeout(timer);
+              timer = window.setTimeout( ()=>{ action.apply(me, args) }, delay);
+            }
+          },
           encode(s){
             return (s||"").replace(/\r/g, "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
           }
