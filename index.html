@@ -48,12 +48,13 @@
       h5 { font-size: 1.2em; }
       h6 { font-size: 1.0em; }
       a {
-        color: rgba(0,0,0,0.816);
+        color: #006291;
         text-decoration: none;
+        transition: all 0.3s ease-out;
       }
-      a:link { color: rgba(0,0,0,0.816); }
-      a:visited { color: rgba(0,0,0,0.816); }
-      a:hover { text-decoration: none; color: black; }
+      a:link { color: #006291; }
+      a:visited { color: #006291; }
+      a:hover { text-decoration: none; color: #FF6633; }
       em { font-style: normal; font-weight: normal; }
       hr {
         margin: 0;
@@ -212,14 +213,19 @@
     <script type="text/javascript" src="./cdn/base64.js"></script>
   </head>
   <body>
-    <div class="mx-bar">
-      <em> | </em>
-      <a href="./index.html">HOME</a>
-      <em> | </em>
-      <em id="title" ></em>
-    </div>
-    <div id="content" class="mx-content">正在加载...</div>
-    <div class="mx-bar">We are here.</div>
+    <section class="mx-row mx-small">
+      <em> woo.omuen.com </em>
+      <em class="mx-auto"></em>
+    </section>
+    <hr />
+    <article id="content" class="mx-content">
+      <p>　</p>
+    </article>
+    <hr />
+    <section class="mx-row">
+      <div id="mono" class="mx-small mx-auto"> 因为凡祈求的，就得着；寻找的，就寻见；叩门的，就给他开门。 </div>
+      <div class="mx-small"> Since 2007, MIT </div>
+    </section>
     <script type="text/javascript">
       (()=>{
         const web = window.Web;

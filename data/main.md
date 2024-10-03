@@ -8,6 +8,8 @@ _And miles to go before I sleep_
 _And miles to go before I sleep_  
 
 _Robert Frost_  
-  
+
+![sea](/media/sea.jpg)
+
 [Enter](//www.bimwook.com)  
 　　
