@@ -319,7 +319,7 @@
         }
         web.get("./data/main.md").then((o)=>{
           let title = woo.title(o.text);
-          let html = marked.parse(woo.encode(o.text));
+          let html = marked.build(woo.encode(o.text));
           document.title = title;
           $("#title").innerText = (title);
           $("#content").innerHTML = (html.replace(/<img src=/g, "<img data-src=") );
