@@ -225,7 +225,7 @@
         const web = window.Web;
         const marked = window.Marked;
         const base64 = window.Base64;
-        const $ = (id)=>{ document.querySelector(id) };
+        const $ = (id)=>{ return document.querySelector(id) };
         const woo = {
           rowid: "",
           title(data){
