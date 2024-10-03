@@ -107,7 +107,7 @@
       //code: /^( {4}[^\n]+\n*)+/,
       {
         name: "strong",
-        regex: /\*\* ([\s\S]+?) \*\*(?!\*)|__ ([\s\S]+?) __(?!_)/,
+        regex: /\*\*([\s\S]+?)\*\*(?!\*)|__([\s\S]+?)__(?!_)/,
         execute(data, cache){
           while(true){
             let mcs = (data||"").match(this.regex);
@@ -120,7 +120,7 @@
       },
       {
         name: "italic",
-        regex: /_ ([\s\S]+?) _(?!_)/,
+        regex: /_([\s\S]+?)_(?!_)/,
         execute(data, cache){
           while(true){
             let mcs = (data||"").match(this.regex);
