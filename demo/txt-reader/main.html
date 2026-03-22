@@ -556,9 +556,9 @@
       </div>
     </div>
     <script type="module">
-      import web from "./modules/web.js";
-      import hot from "./modules/hot.js";
-      import { WooStore } from "./modules/store.js";
+      import web from "/modules/web.js";
+      import hot from "/modules/hot.js";
+      import { WooStore } from "/modules/store.js";
       const Store = await WooStore('woo-books',1, [
         { name: 'meta', keyPath: ['mod','name'] },
         { name: 'books', keyPath: ['bookid','name'] },
